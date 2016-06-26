@@ -56,6 +56,7 @@ describe StateMachine do
 
     it 'expects instance to be in the initial state' do
       expect(valid_initial_state_class.new.opened?).to be_truthy
+      expect(valid_initial_state_class.new.current_state).to eql :opened
     end
 
     it 'expects instance not to be in other state' do

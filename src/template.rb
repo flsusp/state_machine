@@ -9,6 +9,10 @@ module StateMachine
         @current_state == state
       end
 
+      def current_state
+        @current_state
+      end
+
       @states.each do |state|
         self.define_singleton_method("#{state}?".to_sym) do
           state = __method__.to_s.gsub(/\?/, '')

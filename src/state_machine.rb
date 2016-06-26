@@ -1,5 +1,5 @@
 require_relative 'template'
-require_relative 'state'
+require_relative 'state_holder'
 require_relative 'errors'
 
 module StateMachine

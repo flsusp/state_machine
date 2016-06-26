@@ -53,6 +53,14 @@ describe StateMachine do
     it 'expects instance creation to not fail' do
       expect { valid_initial_state_class.new }.not_to raise_error
     end
+
+    it 'expects instance to be in the initial state' do
+      expect(valid_initial_state_class.new.opened?).to be_truthy
+    end
+
+    it 'expects instance not to be in other state' do
+      expect(valid_initial_state_class.new.closed?).to be_falsy
+    end
   end
 
   context 'with two initial states' do
@@ -100,11 +108,11 @@ describe StateMachine do
     end
 
     it 'expects first class to have states :opened and :closed' do
-      expect(first.state_names).to eql [ :opened, :closed ]
+      expect(first.states).to eql [ :opened, :closed ]
     end
 
     it 'expects second class to have states :defined and :undefined' do
-      expect(second.state_names).to eql [ :defined, :undefined ]
+      expect(second.states).to eql [ :defined, :undefined ]
     end
   end
 end

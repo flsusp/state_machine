@@ -4,6 +4,7 @@ module StateMachine
       raise InvalidState if !self.class.valid_state_machine?
       @states = self.class.states
       @current_state = self.class.initial_state
+      @events = self.class.events
 
       def state?(state)
         @current_state == state
@@ -17,6 +18,14 @@ module StateMachine
         self.define_singleton_method("#{state}?".to_sym) do
           state = __method__.to_s.gsub(/\?/, '')
           state?(state.to_sym)
+        end
+      end
+
+      @events.each do |event|
+        self.define_singleton_method(event.name.to_sym) do
+          transition = event.get_transition_from(@current_state)
+          raise InvalidStateTransition if transition.nil?
+          @current_state = transition.execute
         end
       end
 
@@ -36,6 +45,13 @@ module StateMachine
       end
     end
 
+    def event(event_name, &block)
+      raise MultipleEventsWithSameName if event_names.include? event_name
+      event = StateMachine::Event.new(event_name)
+      yield(event)
+      events << event
+    end
+
     def initial_state
       @initial_state
     end
@@ -43,6 +59,15 @@ module StateMachine
     def states
       @states = [] if @states.nil?
       @states
+    end
+
+    def events
+      @events = [] if @events.nil?
+      @events
+    end
+
+    def event_names
+      events.map { |event| event.name }
     end
   end
 end

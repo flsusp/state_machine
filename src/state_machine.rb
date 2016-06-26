@@ -1,5 +1,6 @@
 require_relative 'template'
-require_relative 'state_holder'
+require_relative 'event'
+require_relative 'transition'
 require_relative 'errors'
 
 module StateMachine

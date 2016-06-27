@@ -4,6 +4,8 @@ require 'ruby-graphviz'
 require_relative 'src/state_machine'
 require_relative 'spec/sample_state_machine'
 
+raise 'Missing output file' if ARGV.length == 0
+
 nodes, edges = SampleStateMachine.graph
 
 g = GraphViz.new( :G, :type => :digraph )

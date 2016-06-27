@@ -27,6 +27,11 @@ module StateMachine
           raise InvalidStateTransition if transition.nil?
           @current_state = transition.execute
         end
+
+        self.define_singleton_method("can_#{event.name}?".to_sym) do
+          transition = event.get_transition_from(@current_state)
+          !transition.nil?
+        end
       end
 
       super

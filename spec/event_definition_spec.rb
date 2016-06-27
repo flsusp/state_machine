@@ -65,6 +65,10 @@ describe StateMachine do
         instance.finish
       end
 
+      it 'expects transition to not be available' do
+        expect(instance.can_finish?).to be_falsy
+      end
+
       it 'expects to raise error' do
         expect { instance.finish }.to raise_error StateMachine::InvalidStateTransition
       end

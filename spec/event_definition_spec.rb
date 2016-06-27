@@ -42,6 +42,14 @@ describe StateMachine do
         expect(instance.created?).to be_falsy
         expect(instance.started?).to be_truthy
       end
+
+      it 'expects the executed transition not to be available' do
+        expect(instance.can_start?).to be_falsy
+      end
+
+      it 'expects next transitions to be available' do
+        expect(instance.can_finish?).to be_truthy
+      end
     end
 
     context 'when calls an event with a transition hook' do

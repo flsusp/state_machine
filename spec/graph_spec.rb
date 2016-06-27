@@ -8,22 +8,22 @@ describe StateMachine do
 
     context 'nodes' do
       it { expect(nodes).to have(3).items }
-      it { expect(nodes).to include :sleep }
-      it { expect(nodes).to include :freak }
-      it { expect(nodes).to include :eat }
+      it { expect(nodes).to include :sleeping }
+      it { expect(nodes).to include :freaking }
+      it { expect(nodes).to include :eating }
     end
 
     context 'edges' do
       it { expect(edges).to have(9).items }
-      it { expect(edges).to include({ from: :sleep, to: :sleep, label: :tired }) }
-      it { expect(edges).to include({ from: :sleep, to: :freak, label: :bored }) }
-      it { expect(edges).to include({ from: :sleep, to: :eat, label: :hungry }) }
-      it { expect(edges).to include({ from: :freak, to: :sleep, label: :tired }) }
-      it { expect(edges).to include({ from: :freak, to: :freak, label: :bored }) }
-      it { expect(edges).to include({ from: :freak, to: :eat, label: :hungry }) }
-      it { expect(edges).to include({ from: :eat, to: :sleep, label: :tired }) }
-      it { expect(edges).to include({ from: :eat, to: :freak, label: :bored }) }
-      it { expect(edges).to include({ from: :eat, to: :eat, label: :hungry }) }
+      it { expect(edges).to include({ from: :sleeping, to: :sleeping, label: :tired }) }
+      it { expect(edges).to include({ from: :sleeping, to: :freaking, label: :bored }) }
+      it { expect(edges).to include({ from: :sleeping, to: :eating, label: :hungry }) }
+      it { expect(edges).to include({ from: :freaking, to: :sleeping, label: :tired }) }
+      it { expect(edges).to include({ from: :freaking, to: :freaking, label: :bored }) }
+      it { expect(edges).to include({ from: :freaking, to: :eating, label: :hungry }) }
+      it { expect(edges).to include({ from: :eating, to: :sleeping, label: :tired }) }
+      it { expect(edges).to include({ from: :eating, to: :freaking, label: :bored }) }
+      it { expect(edges).to include({ from: :eating, to: :eating, label: :hungry }) }
     end
   end
 end

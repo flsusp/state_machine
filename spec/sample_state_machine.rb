@@ -1,25 +1,25 @@
 class SampleStateMachine
   include StateMachine
 
-  state :sleep, initial: true
-  state :eat
-  state :freak
+  state :sleeping, initial: true
+  state :eating
+  state :freaking
 
   event :tired do |event|
-    event.from :sleep, to: :sleep
-    event.from :freak, to: :sleep
-    event.from :eat, to: :sleep
+    event.from :sleeping, to: :sleeping
+    event.from :freaking, to: :sleeping
+    event.from :eating, to: :sleeping
   end
 
   event :bored do |event|
-    event.from :freak, to: :freak
-    event.from :sleep, to: :freak
-    event.from :eat, to: :freak
+    event.from :freaking, to: :freaking
+    event.from :sleeping, to: :freaking
+    event.from :eating, to: :freaking
   end
 
   event :hungry do |event|
-    event.from :eat, to: :eat
-    event.from :sleep, to: :eat
-    event.from :freak, to: :eat
+    event.from :eating, to: :eating
+    event.from :sleeping, to: :eating
+    event.from :freaking, to: :eating
   end
 end

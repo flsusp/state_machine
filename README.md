@@ -6,28 +6,28 @@ Simple ruby state machine module.
 class SampleStateMachine
   include StateMachine
 
-  state :sleep, initial: true
-  state :eat
-  state :freak
+  state :sleeping, initial: true
+  state :eating
+  state :freaking
 
   event :tired do |event|
-    event.from :sleep, to: :sleep do
+    event.from :sleeping, to: :sleeping do
         do_something_here_when_state_changes
     end
-    event.from :freak, to: :sleep
-    event.from :eat, to: :sleep
+    event.from :freaking, to: :sleeping
+    event.from :eating, to: :sleeping
   end
 
   event :bored do |event|
-    event.from :freak, to: :freak
-    event.from :sleep, to: :freak
-    event.from :eat, to: :freak
+    event.from :freaking, to: :freaking
+    event.from :sleeping, to: :freaking
+    event.from :eating, to: :freaking
   end
 
   event :hungry do |event|
-    event.from :eat, to: :eat
-    event.from :sleep, to: :eat
-    event.from :freak, to: :eat
+    event.from :eating, to: :eating
+    event.from :sleeping, to: :eating
+    event.from :freaking, to: :eating
   end
 end
 ```
@@ -36,10 +36,10 @@ Examples of usage (using an instance of ```SampleStateMachine```):
 
 ```ruby
 example = SampleStateMachine.new
-example.current_state # [:sleep]
-example.sleep? # [true]
-example.eat? # [false]
+example.current_state # [:sleeping]
+example.sleeping? # [true]
+example.eating? # [false]
 example.hungry
-example.current_state # [:eat]
+example.current_state # [:eating]
 example.can_bored? # [true]
 ```

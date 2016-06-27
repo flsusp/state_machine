@@ -15,8 +15,11 @@ module StateMachine
       @transitions.find { |transition| transition.from == from }
     end
 
-    def assert_transitions
+    def assert_transitions(states)
       raise StateMachine::EventWithoutTransitions if @transitions.empty?
+      @transitions.each do |transition|
+        transition.assert_valid(states)
+      end
     end
   end
 end

@@ -98,4 +98,22 @@ describe StateMachine do
       end.to raise_error StateMachine::EventWithoutTransitions
     end
   end
+
+  context 'with event transitions for invalid states' do
+    it 'expects class creation to fail' do
+      expect do
+        Class.new do
+          include StateMachine
+
+          state :created, initial: true
+          state :started
+          state :finished
+
+          event :start do |event|
+            event.from :opened, to: :started
+          end
+        end
+      end.to raise_error StateMachine::InvalidStateTransition
+    end
+  end
 end

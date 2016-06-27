@@ -1,6 +1,6 @@
 module StateMachine
   class Event
-    attr_reader :name
+    attr_reader :name, :transitions
 
     def initialize(name)
       @name = name

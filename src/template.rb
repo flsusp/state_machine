@@ -16,7 +16,8 @@ module StateMachine
     def event(event_name, &block)
       raise MultipleEventsWithSameName if event_names.include? event_name
       event = StateMachine::Event.new(event_name)
-      yield(event)
+      yield(event) if block_given?
+      event.assert_transitions
       events << event
     end
 

@@ -4,4 +4,5 @@ module StateMachine
   class MultipleStatesWithSameName < StandardError; end
   class MultipleEventsWithSameName < StandardError; end
   class InvalidStateTransition < StandardError; end
+  class EventWithoutTransitions < StandardError; end
 end

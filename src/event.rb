@@ -14,5 +14,9 @@ module StateMachine
     def get_transition_from(from)
       @transitions.find { |transition| transition.from == from }
     end
+
+    def assert_transitions
+      raise StateMachine::EventWithoutTransitions if @transitions.empty?
+    end
   end
 end

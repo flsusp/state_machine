@@ -70,4 +70,20 @@ describe StateMachine do
       end
     end
   end
+
+  context 'with event without transitions' do
+    it 'expects class creation to fail' do
+      expect do
+        Class.new do
+          include StateMachine
+
+          state :created, initial: true
+          state :started
+          state :finished
+
+          event :start
+        end
+      end.to raise_error StateMachine::EventWithoutTransitions
+    end
+  end
 end

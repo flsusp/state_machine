@@ -59,5 +59,15 @@ describe StateMachine do
         expect(stub_obj).not_to have_received(:register).with(:started_to_finished)
       end
     end
+
+    context 'when calls an event that is not allowed on the current state' do
+      before do
+        instance.finish
+      end
+
+      it 'expects to raise error' do
+        expect { instance.finish }.to raise_error StateMachine::InvalidStateTransition
+      end
+    end
   end
 end
